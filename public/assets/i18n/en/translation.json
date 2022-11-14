@@ -73,5 +73,6 @@
     "discount": "discount",
     "no_listings_for_sale": "No listings for sale",
     "no_listings_for_rent": "No listings for rent",
-    "load_more": "Load More"
+    "load_more": "Load More",
+    "filters": "Filters"
 }

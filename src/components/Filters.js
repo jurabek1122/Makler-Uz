@@ -1,9 +1,13 @@
-import {filterData} from '../assets/filterData';
+import { filterData } from '../assets/filterData';
 import { useState, useEffect } from 'react';
 import { BsFilter } from 'react-icons/bs';
-
+import { useTranslation } from 'react-i18next';
 
 const Filters = ({ setFiltered, listings }) => {
+    
+    
+    const [toggle, setToggle] = useState(false)
+    const { t } = useTranslation()
     const [filters, setFilters] = useState({
         purpose: 'all',
         rooms: 0,
@@ -12,13 +16,12 @@ const Filters = ({ setFiltered, listings }) => {
         region: 'all'
     })
 
+    useEffect(() => {
+      
+
     const {
         purpose, rooms, price, square, region
     } = filters
-    
-    const [toggle, setToggle] = useState(false)
-
-    useEffect(() => {
         const filtered = [...listings]
         const data = filtered.filter(item => item.data.rooms*1 > rooms*1)
         .filter(item => item.data.offer ? item.data.discountedPrice*1 > price*1 : item.data.regularPrice*1 > price*1 )
@@ -26,7 +29,7 @@ const Filters = ({ setFiltered, listings }) => {
         .filter(item => region !== 'all' ? item.data.address.includes(region) : item.data.rooms > 0)
         .filter(item => item.data.square*1 > square*1)
         setFiltered(data)
-    }, [listings, filters])
+    }, [listings, filters, toggle])
 
     const onChange = (e) => {
         setFilters((prev) => ({
@@ -34,10 +37,11 @@ const Filters = ({ setFiltered, listings }) => {
             [e.target.name]: e.target.value
         }))
     }
+
     return (
         <>
             <div className='filterToggle'>
-                <h3>Filters</h3>
+                <h3>{t('filters')}</h3>
                 <BsFilter onClick={() => setToggle(!toggle)} />
             </div>
             {toggle ? (

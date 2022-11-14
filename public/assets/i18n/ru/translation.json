@@ -73,5 +73,7 @@
     "discount": "скидка",
     "no_listings_for_sale": "Нет объявлений о продаже",
     "no_listings_for_rent": "Нет объявлений об аренде",
-    "load_more": "Загрузи больше"
+    "load_more": "Загрузи больше",
+    "filters": "Фильтры"
+
 }

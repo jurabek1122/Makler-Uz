@@ -10,11 +10,11 @@ const OAuth = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const { t } = useTranslation()
+    const provider = new GoogleAuthProvider()
 
     const onGoogleClick = async () => {
         try {
             const auth = getAuth()
-            const provider = new GoogleAuthProvider()
             const result = await signInWithPopup(auth, provider)
             const user = result.user
 
