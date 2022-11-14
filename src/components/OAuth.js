@@ -31,6 +31,7 @@ const OAuth = () => {
             navigate('/profile')
         } catch (error) {
             toast.error(`${t('could_not_authorized_with_google')}`)
+            console.log(error)
         }
     }
     return (
