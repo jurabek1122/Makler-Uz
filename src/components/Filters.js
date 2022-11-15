@@ -1,4 +1,4 @@
-import { filterData } from '../assets/filterData';
+import { en, uz, ru } from '../assets/filterData';
 import { useState, useEffect } from 'react';
 import { BsFilter } from 'react-icons/bs';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +7,7 @@ const Filters = ({ setFiltered, listings }) => {
     
     
     const [toggle, setToggle] = useState(false)
+    const [data, setData] = useState(en)
     const { t } = useTranslation()
     const [filters, setFilters] = useState({
         purpose: 'all',
@@ -15,9 +16,17 @@ const Filters = ({ setFiltered, listings }) => {
         square: 0,
         region: 'all'
     })
-
+    
     useEffect(() => {
-      
+        if(localStorage.getItem("i18nextLng") === 'en') {
+            setData(en)
+        } else if(localStorage.getItem("i18nextLng") === 'uz') {
+            setData(uz)
+        } else {
+            setData(ru)
+        }
+    }, [localStorage.getItem("i18nextLng")])
+    useEffect(() => {
 
     const {
         purpose, rooms, price, square, region
@@ -46,7 +55,7 @@ const Filters = ({ setFiltered, listings }) => {
             </div>
             {toggle ? (
                 <div className='filters'>
-                    {filterData.map((filter) => (
+                    {data.map((filter) => (
                         <div key={filter.name}>
                         <label>{filter.placeholder}</label>
                         <select name={filter.name} onChange={onChange} placeholder={filter.placeholder}>
